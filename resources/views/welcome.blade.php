@@ -18,21 +18,22 @@
 
             <!-- LOGO -->
             <a href="/" class="flex items-center gap-3">
-                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-xl font-bold text-white">
-                    A
+                <!-- Contenedor más grande (ej: h-12 w-12 en vez de h-11 w-11) -->
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white">
+                    <!-- w-full h-full para forzar que crezca al tamaño del contenedor -->
+                    <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo de Acadely" class="w-full h-full object-contain p-1">
                 </div>
 
+                <!-- Text Info -->
                 <div>
                     <h1 class="text-xl font-bold text-slate-900">
                         Acadely
                     </h1>
-
                     <p class="text-xs text-slate-500">
                         Plataforma académica inteligente
                     </p>
                 </div>
             </a>
-
             <!-- MENU -->
             <nav class="hidden items-center gap-8 md:flex">
                 <a href="#funciones"
@@ -53,12 +54,12 @@
 
             <!-- ACCIONES -->
             <div class="flex items-center gap-3">
-                <a href="#"
+                <a href="/login"
                    class="hidden rounded-lg px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 sm:block">
                     Iniciar sesión
                 </a>
 
-                <a href="#"
+                <a href="/dashboard"
                    class="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">
                     Comenzar
                 </a>
