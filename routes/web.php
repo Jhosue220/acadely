@@ -1,40 +1,30 @@
 <?php
 
+use App\Http\Controllers\InicioController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EstudianteController;
 
-Route::get('/', function () {
+// Página de bienvenida
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/inicio', function () {
-    return view('inicio');
-});
+// Páginas principales
+Route::get('/', [InicioController::class, 'index'])->name('inicio');
+Route::get('/login', [InicioController::class, 'login'])->name('login');
+Route::get('/registro', [InicioController::class, 'registro'])->name('registro');
+Route::get('/dashboard', [InicioController::class, 'dashboard'])->name('dashboard');
+Route::get('/perfil', [InicioController::class, 'perfil'])->name('perfil');
+Route::get('/create', [InicioController::class, 'create'])->name('create');
+Route::get('/estudiantes', [EstudianteController::class, 'index'])->name('estudiantes');
 
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/registro' , function () {
-    return view('registro');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-Route::get('/perfil', function () {
-    return view('perfil');
-}); // <-- Quitamos el ->middleware(['auth']) por ahora
-
-Route::get('/create', function () {
-    return view('create');
-});
-
-use Illuminate\Support\Facades\Auth;
-
+// Cerrar sesión
 Route::post('/logout', function () {
     Auth::logout();
+
     request()->session()->invalidate();
     request()->session()->regenerateToken();
+
     return redirect('/');
 })->name('logout');

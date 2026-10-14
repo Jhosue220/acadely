@@ -6,7 +6,8 @@
     <title>Acadely - Plataforma de Generacion de Material Académico Automatico</title>
 </head>
 <body>
-    <h1>Bienvenido a Acadely</h1>
-    <p>Esta es la plataforma de generación de material académico automático.</p>
+    <h1>{{$nombrePlataforma}}</h1>
+    <p>Framework: {{$framework}}</p>
+    <p>Periodo: {{$periodo}}</p>
 </body>
 </html>

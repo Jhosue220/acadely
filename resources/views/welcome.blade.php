@@ -18,10 +18,13 @@
 
             <!-- LOGO -->
             <a href="/" class="flex items-center gap-3">
-                <!-- Contenedor más grande (ej: h-12 w-12 en vez de h-11 w-11) -->
+                
                 <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white">
-                    <!-- w-full h-full para forzar que crezca al tamaño del contenedor -->
-                    <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo de Acadely" class="w-full h-full object-contain p-1">
+                    <img
+                        src="{{ Vite::asset('resources/img/logo.png') }}"
+                        alt="Logo de Acadely"
+                        class="object-contain"
+                    >
                 </div>
 
                 <!-- Text Info -->
