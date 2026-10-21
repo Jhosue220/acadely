@@ -56,3 +56,28 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Iniciar laravel
+npm run dev
+php artisan serve
+
+## Guardar en Git los cambios
+git add .
+git commit -m "Mensaje"
+git push
+
+
+## Validar las tablas de laravel
+php artisan migrate
+## Comprobar tablas
+php artisan migrate:status
+## Comprobar migraciones
+php artisan migrate:rollback
+## Comprobar migraciones
+php artisan migrate:refresh
+## Comprobar migraciones
+php artisan migrate:reset
+## Crear un modelo Estudiante
+php artisan make:model Estudiante --migration
+## Tinker para insertar datos
+php artisan tinker
