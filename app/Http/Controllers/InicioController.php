@@ -10,7 +10,7 @@ class InicioController extends Controller
         $framework = 'Laravel';
         $periodo = '2026 - II';
 
-        return view('inicio', compact(
+        return view('inicio.inicio', compact(
             'nombrePlataforma',
             'framework',
             'periodo'
@@ -19,26 +19,26 @@ class InicioController extends Controller
 
     public function login()
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function registro()
     {
-        return view('registro');
+        return view('auth.registro');
     }
 
     public function dashboard()
     {
-        return view('dashboard');
+        return view('dashboard.index');
     }
 
     public function perfil()
     {
-        return view('perfil');
+        return view('perfil.show');
     }
 
     public function create()
     {
-        return view('create');
+        return view('generador.index');
     }
 }
