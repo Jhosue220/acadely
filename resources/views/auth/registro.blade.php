@@ -33,7 +33,7 @@
         </div>
 
         <!-- FORMULARIO DE REGISTRO -->
-        <form action="/register" method="POST" class="space-y-4">
+        <form action="{{ route('register.store') }}" method="POST" class="space-y-4">
             @csrf
             
             <div>

@@ -15,7 +15,7 @@
         <!-- LOGO Y ENCABEZADO -->
         <div class="mb-8 text-center">
             <a href="/" class="inline-flex items-center gap-3 mb-4">
-                <!-- Contenedor del Logo (puedes ajustar h-12 w-12 si lo quieres más grande) -->
+                <!-- Contenedor del Logo -->
                 <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md">
                     <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo de Acadely" class="h-10 w-10 object-contain scale-125">
                 </div>
@@ -33,22 +33,34 @@
         </div>
 
         <!-- FORMULARIO -->
-        <form class="space-y-5">
+        <form action="{{ route('login.store') }}" method="POST" class="space-y-5">
+            @csrf
+
+            <!-- Campo de Correo Electrónico -->
             <div>
                 <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Correo Electrónico</label>
-                <input type="email" id="email" name="email" required 
-                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required 
+                    class="w-full px-4 py-2.5 bg-slate-50 border @error('email') border-red-500 @else border-slate-300 @enderror rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="tucorreo@ejemplo.com">
+                
+                @error('email')
+                    <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
+                @enderror
             </div>
 
+            <!-- Campo de Contraseña -->
             <div>
                 <div class="flex items-center justify-between mb-1">
                     <label for="password" class="block text-sm font-medium text-slate-700">Contraseña</label>
                     <a href="#" class="text-xs font-medium text-blue-600 hover:underline">¿Olvidaste tu contraseña?</a>
                 </div>
                 <input type="password" id="password" name="password" required 
-                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                    class="w-full px-4 py-2.5 bg-slate-50 border @error('password') border-red-500 @else border-slate-300 @enderror rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="••••••••">
+                
+                @error('password')
+                    <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
+                @enderror
             </div>
 
             <button type="submit" 

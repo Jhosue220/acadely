@@ -61,6 +61,11 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 npm run dev
 php artisan serve
 
+## Limpia la configuración de Laravel
+php artisan config:clear
+Después ejecuta
+php artisan cache:clear 
+
 ## Guardar en Git los cambios
 git add .
 git commit -m "Mensaje"

@@ -6,6 +6,9 @@ use App\Http\Controllers\GeneradorController;
 use App\Http\Controllers\DocumentoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Validation\ValidationException;
 
 // Página de bienvenida
 Route::get('/welcome', function () {
@@ -19,8 +22,52 @@ Route::get('/', [InicioController::class, 'index'])
 Route::get('/login', [InicioController::class, 'login'])
     ->name('login');
 
+// Procesar inicio de sesión
+Route::post('/login', function (Request $request) {
+    $credenciales = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required', 'string'],
+    ]);
+
+    if (! Auth::attempt($credenciales)) {
+        throw ValidationException::withMessages([
+            'email' => 'El correo electrónico o la contraseña son incorrectos.',
+        ]);
+    }
+
+    $request->session()->regenerate();
+
+    return redirect()->intended(route('dashboard'));
+})->middleware('guest')->name('login.store');
+
 Route::get('/registro', [InicioController::class, 'registro'])
     ->name('registro');
+
+// Mostrar formulario de registro
+Route::get('/register', [InicioController::class, 'registro'])
+    ->middleware('guest')
+    ->name('register');
+
+// Procesar registro de usuarios
+Route::post('/register', function (Request $request) {
+    $datos = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+    ]);
+
+    $usuario = User::create([
+        'name' => $datos['name'],
+        'email' => $datos['email'],
+        'password' => $datos['password'],
+    ]);
+
+    Auth::login($usuario);
+
+    $request->session()->regenerate();
+
+    return redirect()->route('dashboard');
+})->middleware('guest')->name('register.store');
 
 Route::get('/dashboard', [InicioController::class, 'dashboard'])
     ->name('dashboard');
@@ -38,6 +85,9 @@ Route::get('/estudiantes', [EstudianteController::class, 'index'])
 Route::get('/estudiantes/{id}', [EstudianteController::class, 'show'])
     ->whereNumber('id')
     ->name('estudiantes.show');
+
+Route::post('/estudiantes', [EstudianteController::class, 'store'])
+    ->name('estudiantes.store');
 
 // Generador de material académico
 Route::get('/generador', [GeneradorController::class, 'index'])
